@@ -1,6 +1,6 @@
 # COMET-Telescope
 
-COMET-Telescope is a simple app that can be used to compare translations produced by two different MT systems.
+[COMET](https://github.com/Unbabel/COMET)-Telescope is a simple app that can be used to compare translations produced by two different MT systems.
 
 ## Requirements:
 
@@ -17,6 +17,7 @@ pip install streamlit
 streamlit run app.py
 ```
 
+## Demo:
 
-
+[![DEMO Video](https://img.youtube.com/vi/971nrdYUCMw/0.jpg)](https://www.youtube.com/watch?v=971nrdYUCMw)
 
