@@ -5,6 +5,7 @@ COMET-Telescope is a simple app that can be used to compare translations produce
 ## Requirements:
 
 ```bash
+git clone https://github.com/Unbabel/COMET-Telescope.git
 pip install unbabel-comet
 pip install streamlit
 ```
@@ -15,10 +16,6 @@ pip install streamlit
 streamlit run app.py
 ```
 
-## Demo:
-
-
-##
 
 
 
