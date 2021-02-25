@@ -119,24 +119,6 @@ class PairedResult:
             st.json(data)
 
 
-class LengthBreakdown:
-
-    def __init__(self, metrics, testset):
-        self.metrics = metrics
-        self.testset = testset
-        self.testset.bucket_by_length()
-
-    def display_length_buckets(self):
-        for label in ["short", "medium", "long"]:
-            src = [self.testset.sources[i] for i in range(len(self.testset)) if self.testset.length_buckets[i] == label]            
-            ref = [self.testset.references[i] for i in range(len(self.testset)) if self.testset.length_buckets[i] == label]            
-            x = [self.testset.system_x[i] for i in range(len(self.testset)) if self.testset.length_buckets[i] == label]            
-            y = [self.testset.system_y[i] for i in range(len(self.testset)) if self.testset.length_buckets[i] == label]            
-            testset = PairedTestset(src, x, y, ref)
-            paired_results = [metric.score_paired_testset(testset, cuda=True) for metric in self.metrics]
-            st.subheader(f"Results for {label} segments:")
-            PairedResult.display_summary(paired_results)
-
 class BootstrapResult:
     def __init__(self, x_scores: list, y_scores: list, win_count: list, num_samples: int, metric: str):
         self.x_scores = x_scores

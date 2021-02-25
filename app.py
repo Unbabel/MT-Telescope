@@ -11,7 +11,7 @@ from metrics.chrf import chrF
 from metrics.comet import COMET
 from metrics.length_ratio import LengthRatio
 from testset import PairedTestset
-from metrics.result import PairedResult, LengthBreakdown
+from metrics.result import PairedResult
 
 # Text/Title
 st.title("COMET Telescope")
@@ -39,16 +39,41 @@ prob_thresh = st.sidebar.slider(
     "P-value threshold for significance test:", 0.0, 1.0, value=0.5, step=0.1
 )
 st.sidebar.subheader("Perform robustness analysis:")
+robustness_options = st.sidebar.multiselect('Robustness filters',
+    ['named entities'],
+)
+st.sidebar.subheader("Segment length filter:")
 st.sidebar.write(
-    "By selecting different 'robustness filters' we can measure how well our model"
-    "is translating source segmenta that contain specific linguistic phenomena (e.g. Named Entities)"
+    "In order to isolate segments according to caracter length "
+    "we will create a density function according to the number "
+    "of characters in the source. The next slider can be used to specify:"
+)
+st.sidebar.latex(r'''P(a \leq X \leq b) ''')
+
+length_interval = st.sidebar.slider("Specify 'a' and 'b':",
+    0, 100, step=5, value=(0, 100)
 )
 
-robustness_options = st.sidebar.multiselect('Robustness filters',
-    ['length', 'typo', 'named entities'],
-)
 testset = PairedTestset.read_data()
 if testset:
+    if 'named entities' in robustness_options:
+        if not testset.check_stanza_languages():
+            robustness_options.remove('named entities')
+        corpus_size = len(testset)
+        testset = testset.ner_filter()
+        st.success(
+            "Named Entities Filter applied! " 
+            "Corpus reduced in {:.2f}%".format(1- len(testset)/corpus_size)
+        )
+    
+    if length_interval != (0, 100):
+        corpus_size = len(testset)
+        testset = testset.length_filter(length_interval[0], length_interval[1])
+        st.success(
+            "Length filter applied! "
+            "Corpus reduced in {:.2f}%".format(1- len(testset)/corpus_size)
+        )
+    
     if st.button("Run Comparison"):
         metrics = [COMET(modelname), BLEU(), chrF(), LengthRatio()]
         paired_results = []
@@ -76,10 +101,4 @@ if testset:
                     )
                     if bootstrap_result:
                         bootstrap_result.display_wins()
-
-        # Breakdown by Lengths
-        if "length" in robustness_options:
-            st.header("Robustness Analysis:")
-            st.subheader("Break down results by segment length:")
-            LengthBreakdown(metrics, testset).display_length_buckets()
-            paired_results[0].display_json()
+    
