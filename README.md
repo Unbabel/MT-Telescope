@@ -1,3 +1,6 @@
+# Disclaimer:
+UNDER DEVELOPMENT
+
 # COMET-Telescope
 
 [COMET](https://github.com/Unbabel/COMET)-Telescope is a simple app that can be used to compare translations produced by two different MT systems.
