@@ -9,6 +9,7 @@ git clone https://github.com/Unbabel/COMET-Telescope.git
 pip install unbabel-comet
 pip install plotly
 pip install streamlit
+pip install stanza
 ```
 
 ## Running:
