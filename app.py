@@ -10,7 +10,7 @@ from metrics.bleu import BLEU
 from metrics.chrf import chrF
 from metrics.comet import COMET
 from metrics.length_ratio import LengthRatio
-from testset import PairedTestset
+from testset import PairedTestset, read_lines
 from metrics.result import PairedResult
 
 # Text/Title
@@ -40,8 +40,13 @@ prob_thresh = st.sidebar.slider(
 )
 st.sidebar.subheader("Perform robustness analysis:")
 robustness_options = st.sidebar.multiselect('Robustness filters',
-    ['named entities'],
+    ['named entities', 'glossary terms'],
 )
+
+if 'glossary terms' in robustness_options:
+    glossary_file = st.file_uploader("Upload a glossary file", type=["txt"])
+    glossary = read_lines(glossary_file)
+
 st.sidebar.subheader("Segment length filter:")
 st.sidebar.write(
     "In order to isolate segments according to caracter length "
@@ -56,24 +61,27 @@ length_interval = st.sidebar.slider("Specify 'a' and 'b':",
 
 testset = PairedTestset.read_data()
 if testset:
+    corpus_size = len(testset)
     if 'named entities' in robustness_options:
         if not testset.check_stanza_languages():
             robustness_options.remove('named entities')
-        corpus_size = len(testset)
         testset = testset.ner_filter()
         st.success(
             "Named Entities Filter applied! " 
-            "Corpus reduced in {:.2f}%".format(1- len(testset)/corpus_size)
         )
     
     if length_interval != (0, 100):
-        corpus_size = len(testset)
         testset = testset.length_filter(length_interval[0], length_interval[1])
         st.success(
             "Length filter applied! "
-            "Corpus reduced in {:.2f}%".format(1- len(testset)/corpus_size)
         )
-    
+    if glossary:
+        testset = testset.glossary_filter(glossary)
+        st.success(
+            "Glossary filter applied! "
+        )
+    st.success("Corpus reduced in {:.2f}%".format(1- len(testset)/corpus_size))
+
     if st.button("Run Comparison"):
         metrics = [COMET(modelname), BLEU(), chrF(), LengthRatio()]
         paired_results = []

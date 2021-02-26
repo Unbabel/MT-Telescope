@@ -163,3 +163,19 @@ class PairedTestset:
                 trg_lang=self.trg_lang
             )
         
+    @st.cache()
+    def glossary_filter(self, glossary):
+        gloss_idx = []
+        for i, sentence in enumerate(self.sources):
+            for gloss_term in glossary:
+                if gloss_term in sentence:
+                    gloss_idx.append(i)
+        
+        return PairedTestset(
+            sources=[self.sources[i] for i in gloss_idx],
+            system_x=[self.system_x[i] for i in gloss_idx],
+            system_y=[self.system_y[i] for i in gloss_idx],
+            references=[self.references[i] for i in gloss_idx],
+            src_lang=self.src_lang,
+            trg_lang=self.trg_lang
+        )
