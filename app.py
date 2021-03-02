@@ -43,6 +43,7 @@ robustness_options = st.sidebar.multiselect('Robustness filters',
     ['named entities', 'glossary terms'],
 )
 
+glossary = False
 if 'glossary terms' in robustness_options:
     glossary_file = st.file_uploader("Upload a glossary file", type=["txt"])
     glossary = read_lines(glossary_file)
