@@ -1,12 +1,13 @@
 import abc
-import streamlit as st
-from metrics.result import BootstrapResult, PairedResult
+
 import numpy as np
+import streamlit as st
 from testset import PairedTestset
+
+from metrics.result import BootstrapResult, PairedResult
 
 
 class Metric(metaclass=abc.ABCMeta):
-    
     @abc.abstractmethod
     @st.cache
     def score(self, sources, hypothesis, references, **kwargs):
@@ -15,20 +16,19 @@ class Metric(metaclass=abc.ABCMeta):
     @st.cache
     def score_paired_testset(self, testset, **kwargs):
         with st.spinner(f"Running {self.name} for system X"):
-            x_result = self.score(testset.sources, testset.system_x, testset.references, **kwargs)
+            x_result = self.score(
+                testset.sources, testset.system_x, testset.references, **kwargs
+            )
         with st.spinner(f"Running {self.name} for system Y"):
-            y_result = self.score(testset.sources, testset.system_y, testset.references, **kwargs)
+            y_result = self.score(
+                testset.sources, testset.system_y, testset.references, **kwargs
+            )
         return PairedResult(x_result, y_result, self.name)
 
     @st.cache
     def paired_bootstrap(
-        self, 
-        testset, 
-        num_samples=1000, 
-        sample_ratio=0.5, 
-        **kwargs
+        self, testset, num_samples=1000, sample_ratio=0.5, **kwargs
     ) -> None:
-        
         def update_wins(x_score, y_score, wins):
             if y_score > x_score:
                 wins[1] += 1
@@ -50,7 +50,7 @@ class Metric(metaclass=abc.ABCMeta):
             # Calculate accuracy on the reduced sample and save stats
             reduced_src = [testset[i][0] for i in reduced_ids]
             reduced_x = [testset[i][1] for i in reduced_ids]
-            reduced_y = [testset[i][2] for i in reduced_ids] 
+            reduced_y = [testset[i][2] for i in reduced_ids]
             reduced_ref = [testset[i][3] for i in reduced_ids]
 
             paired_result = self.score_paired_testset(
@@ -65,6 +65,5 @@ class Metric(metaclass=abc.ABCMeta):
                 wins[1] += 1
             else:
                 wins[2] += 1
-                
+
         return BootstrapResult(x_scores, y_scores, wins, num_samples, self.name)
-    
