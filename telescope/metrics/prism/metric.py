@@ -9,6 +9,7 @@ import os
 import sys
 from typing import Any, Dict, Iterator, List, Tuple
 
+import streamlit as st
 import numpy as np
 import sentencepiece as spm
 import torch
@@ -304,8 +305,8 @@ class Prism(Metric):
             raise Exception('Missing one or more sentence scores')
 
         return np.array(results)
-
-    def score(self, src, cand, ref):
+    
+    def streamlit_score(self, src, cand, ref):
         tokenized_cand = [self._encode(sentence, prepend=False) for sentence in cand]
         tokenized_cand_prep = [self._encode(sentence, prepend=True) for sentence in cand]
 
@@ -315,6 +316,9 @@ class Prism(Metric):
         tokenized_ref_prep = [self._encode(sentence, prepend=True) for sentence in ref]
         forward_scores = self._score_forward(tok_sents_in=tokenized_ref, tok_sents_out=tokenized_cand_prep)
         reverse_scores = self._score_forward(tok_sents_in=tokenized_cand, tok_sents_out=tokenized_ref_prep)
-        scores = 0.5 * forward_scores + 0.5 * reverse_scores
+        scores = (0.5 * forward_scores + 0.5 * reverse_scores).tolist()
+        return scores
 
-        return PrismResult(np.mean(scores), scores, src, cand, ref)
+    def score(self, src, cand, ref):
+        scores = self.streamlit_score(src, cand, ref)
+        return PrismResult(sum(scores)/len(scores), scores, src, cand, ref)

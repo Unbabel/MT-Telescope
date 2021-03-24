@@ -7,6 +7,8 @@ from torchnlp.download import download_file_maybe_extract
 
 from bleurt import score
 
+import streamlit as st
+
 
 class BLEURT(Metric):
     name = "BLEURT"
@@ -21,8 +23,12 @@ class BLEURT(Metric):
         self.scorer = score.BleurtScorer(telescope_cache_folder() + model)
         self.system_only = False
 
+    @st.cache
+    def streamlit_score(self, src, cand, ref):
+        return self.scorer.score(ref, cand)
+        
     def score(self, src, cand, ref):
-        scores = self.scorer.score(ref, cand)
+        scores = self.streamlit_score(src, cand, ref)
         return BLEURTResult(
             sum(scores) / len(scores), scores, src, cand, ref
         )

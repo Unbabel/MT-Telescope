@@ -19,12 +19,12 @@ class BERTScore(Metric):
         scores = bert_score.score(
             cands=cand,
             refs=ref,
-            idf=True,
+            idf=False,
             batch_size=32,
             lang=self.lang,
             rescale_with_baseline=False,
             verbose=True,
-            nthreads=4,
+            nthreads=1,
         )[2].tolist()
         return scores
 
