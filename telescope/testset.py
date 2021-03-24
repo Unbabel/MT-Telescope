@@ -56,21 +56,24 @@ class Testset:
         y_file = right2.file_uploader("Upload System Y Translations", type=["txt"])
         y = read_lines(y_file)
 
+        language_pair = st.text_input("Please input the lanaguage pair of the files to analyse (e.g. 'en-ru'):", "")
+        
         if (
             (ref_file is not None)
             and (source_file is not None)
             and (y_file is not None)
             and (x_file is not None)
+            and (language_pair != "")
         ):
 
-            st.success("Source, Refereces and Translations were successfully uploaded!")
+            st.success("Source, References, Translations and LP were successfully uploaded!")
             return cls(
                 sources,
                 x,
                 y,
                 references,
-                source_file.name.split(".")[-2],
-                ref_file.name.split(".")[-2],
+                language_pair.split("-")[0],
+                language_pair.split("-")[1],
             )
 
     def __len__(self) -> int:

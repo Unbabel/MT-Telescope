@@ -58,18 +58,18 @@ class Metric(metaclass=abc.ABCMeta):
                 wins[2] += 1
             return wins
 
-        def recompute_sys_scores():
+        def recompute_sys_scores(pairwise_result):
             if self.system_only:
-                pairwise_result = self.pairwise_comparison(
+                result = self.pairwise_comparison(
                     Testset(reduced_src, reduced_x, reduced_y, reduced_ref)
                 )
                 return (
-                    pairwise_result.x_result.sys_score, 
-                    pairwise_result.y_result.sys_score
+                    result.x_result.sys_score, 
+                    result.y_result.sys_score
                 )
             elif pairwise_result is not None:
                 reduces_x_scr = [pairwise_result.x_result.seg_scores[i] for i in reduced_ids]
-                reduces_y_scr = [pairwise_result.x_result.seg_scores[i] for i in reduced_ids]
+                reduces_y_scr = [pairwise_result.y_result.seg_scores[i] for i in reduced_ids]
                 return (
                     sum(reduces_x_scr)/len(reduces_x_scr), 
                     sum(reduces_y_scr)/len(reduces_y_scr), 
@@ -102,15 +102,9 @@ class Metric(metaclass=abc.ABCMeta):
             reduced_y = [testset[i][2] for i in reduced_ids]
             reduced_ref = [testset[i][3] for i in reduced_ids]
 
-            x_result, y_result = recompute_sys_scores()
+            x_result, y_result = recompute_sys_scores(pairwise_result)
+            wins = update_wins(x_result, y_result, wins)
             x_scores.append(x_result)
             y_scores.append(y_result)
-
-            if x_scores[-1] > y_scores[-1]:
-                wins[0] += 1
-            elif x_scores[-1] < y_scores[-1]:
-                wins[1] += 1
-            else:
-                wins[2] += 1
 
         return BootstrapResult(x_scores, y_scores, wins, num_samples, self.name)

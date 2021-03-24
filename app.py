@@ -99,7 +99,7 @@ if testset:
     st.success("Corpus reduced in {:.2f}%".format((1 - len(testset) / corpus_size)*100))
     _, midle, _  = st.beta_columns(3)
     if midle.button("Click here for analysis"):
-        system_metrics = [available_metrics[m]() for m in metrics if m != "COMET"]
+        system_metrics = [available_metrics[m](lang=testset.trg_lang) for m in metrics if m != "COMET"]
         if "COMET" in metrics:
             system_metrics = [comet_metric,] + system_metrics
         
