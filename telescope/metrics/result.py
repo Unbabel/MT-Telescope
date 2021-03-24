@@ -1,6 +1,8 @@
 import abc
 from typing import List, Tuple
 
+import numpy as np
+
 
 class MetricResult(metaclass=abc.ABCMeta):
     def __init__(

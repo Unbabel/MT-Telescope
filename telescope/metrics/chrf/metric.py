@@ -10,7 +10,7 @@ class chrF(Metric):
     
     name = "chrF"
 
-    def __init__(self):
+    def __init__(self, **kwargs):
         self.system_only = True
 
     @st.cache

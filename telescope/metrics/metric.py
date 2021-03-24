@@ -31,25 +31,6 @@ class Metric(metaclass=abc.ABCMeta):
             )
             return PairwiseResult(x_result, y_result, self.name, self.system_only)
 
-    def _recompute_sys_scores(self, reduced_ids, pairwise_result=None):
-        if self.system_only:
-            pairwise_result = self.pairwise_comparison(
-                Testset(reduced_src, reduced_x, reduced_y, reduced_ref)
-            )
-            return (
-                pairwise_result.x_result.sys_score, 
-                pairwise_result.y_result.sys_score
-            )
-        elif pairwise_result is not None:
-            reduces_x_scr = [pairwise_result.x_result.seg_scores[i] for i in reduced_ids]
-            reduces_y_scr = [pairwise_result.x_result.seg_scores[i] for i in reduced_ids]
-            return (
-                sum(reduces_x_scr)/len(reduces_x_scr), 
-                sum(reduces_y_scr)/len(reduces_y_scr), 
-            )
-        else:
-            raise Exception("Bootstrap_resampling expects precomputed results for segment-level metrics.")
-
     def bootstrap_resampling(
         self, 
         testset: Testset,
@@ -77,6 +58,26 @@ class Metric(metaclass=abc.ABCMeta):
                 wins[2] += 1
             return wins
 
+        def recompute_sys_scores():
+            if self.system_only:
+                pairwise_result = self.pairwise_comparison(
+                    Testset(reduced_src, reduced_x, reduced_y, reduced_ref)
+                )
+                return (
+                    pairwise_result.x_result.sys_score, 
+                    pairwise_result.y_result.sys_score
+                )
+            elif pairwise_result is not None:
+                reduces_x_scr = [pairwise_result.x_result.seg_scores[i] for i in reduced_ids]
+                reduces_y_scr = [pairwise_result.x_result.seg_scores[i] for i in reduced_ids]
+                return (
+                    sum(reduces_x_scr)/len(reduces_x_scr), 
+                    sum(reduces_y_scr)/len(reduces_y_scr), 
+                )
+            else:
+                raise Exception("Bootstrap_resampling expects precomputed results for segment-level metrics.")
+
+
         n = len(testset)
         st.warning(
             f"Testset length is too short ({n}). Results are not be reliable, please upload a bigger testset."
@@ -100,7 +101,8 @@ class Metric(metaclass=abc.ABCMeta):
             reduced_x = [testset[i][1] for i in reduced_ids]
             reduced_y = [testset[i][2] for i in reduced_ids]
             reduced_ref = [testset[i][3] for i in reduced_ids]
-            x_result, y_result = self._recompute_sys_scores(reduced_ids, pairwise_result)
+
+            x_result, y_result = recompute_sys_scores()
             x_scores.append(x_result)
             y_scores.append(y_result)
 

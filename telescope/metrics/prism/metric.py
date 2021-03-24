@@ -173,7 +173,7 @@ class SequenceScorer(object):
 class Prism(Metric):
     name = "Prism"
 
-    def __init__(self, lang, temperature=1.0, model_dir=telescope_cache_folder()+"/m39v1"):
+    def __init__(self, lang, temperature=1.0, model_dir=telescope_cache_folder()+"/m39v1", **kwargs):
         '''
         model_dir should contain:
          1) checkpoint.pt: the fairseq model

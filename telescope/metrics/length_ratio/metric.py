@@ -8,7 +8,7 @@ from telescope.metrics.metric import Metric
 class LengthRatio(Metric):
     name = "Length-ratio"
     
-    def __init__(self):
+    def __init__(self, **kwargs):
         self.system_only = True
 
     @st.cache

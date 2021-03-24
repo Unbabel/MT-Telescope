@@ -10,7 +10,7 @@ import sacrebleu
 class BLEU(Metric):
     name = "sacreBLEU"
     
-    def __init__(self):
+    def __init__(self, **kwargs):
         self.system_only = True
     
     @st.cache

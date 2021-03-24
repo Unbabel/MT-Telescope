@@ -12,7 +12,7 @@ class COMET(Metric):
     
     name = "COMET"
 
-    def __init__(self, modelname: str = "wmt-large-da-estimator-1719"):
+    def __init__(self, modelname: str = "wmt-large-da-estimator-1719",  **kwargs):
         self.modelname = modelname
         self.model = download_model(modelname)
         self.system_only = False

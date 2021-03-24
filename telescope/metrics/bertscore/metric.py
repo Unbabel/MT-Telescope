@@ -10,7 +10,7 @@ class BERTScore(Metric):
 
     name = "BERTScore"
 
-    def __init__(self, lang):
+    def __init__(self, lang, **kwargs):
         self.system_only = False
         self.lang = lang
 
