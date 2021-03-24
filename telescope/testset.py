@@ -2,37 +2,31 @@ from io import StringIO
 
 import pandas as pd
 import streamlit as st
+from typing import List, Tuple
+from telescope.utils import read_lines
 
 
-@st.cache()
-def read_lines(file):
-    if file is not None:
-        file = StringIO(file.getvalue().decode())
-        lines = [line.strip() for line in file.readlines()]
-        return lines
-    return None
-
-
-class PairedTestset:
+class Testset:
     def __init__(
         self,
-        sources: list,
-        system_x: list,
-        system_y: list,
-        references: list,
+        src: List[str],
+        system_x: List[str],
+        system_y: List[str],
+        ref: List[str],
         src_lang: str = None,
         trg_lang: str = None,
     ) -> None:
-        self.sources = sources
-        self.references = references
+        self.src = src
+        self.ref = ref
         self.system_x = system_x
         self.system_y = system_y
         self.src_lang = src_lang
         self.trg_lang = trg_lang
-        assert len(references) == len(
-            sources
+
+        assert len(ref) == len(
+            src
         ), "mismatch between references and sources ({} > {})".format(
-            len(references), len(sources)
+            len(ref), len(src)
         )
         assert len(system_x) == len(
             system_y
@@ -40,24 +34,26 @@ class PairedTestset:
             len(system_x), len(system_y)
         )
         assert len(system_x) == len(
-            references
+            ref
         ), "mismatch between system x and references ({} > {})".format(
-            len(system_x), len(references)
+            len(system_x), len(ref)
         )
 
     @classmethod
     def read_data(cls):
-        st.sidebar.subheader("Upload Files:")
-        source_file = st.sidebar.file_uploader("Upload Sources", type=["txt"])
+        st.subheader("Upload Files for analysis:")
+        left1, right1  = st.beta_columns(2)
+        source_file = left1.file_uploader("Upload Sources", type=["txt"])
         sources = read_lines(source_file)
 
-        ref_file = st.sidebar.file_uploader("Upload References", type=["txt"])
+        ref_file = right1.file_uploader("Upload References", type=["txt"])
         references = read_lines(ref_file)
 
-        x_file = st.sidebar.file_uploader("Upload System X Translations", type=["txt"])
+        left2, right2  = st.beta_columns(2)
+        x_file = left2.file_uploader("Upload System X Translations", type=["txt"])
         x = read_lines(x_file)
 
-        y_file = st.sidebar.file_uploader("Upload System Y Translations", type=["txt"])
+        y_file = right2.file_uploader("Upload System Y Translations", type=["txt"])
         y = read_lines(y_file)
 
         if (
@@ -76,14 +72,9 @@ class PairedTestset:
                 source_file.name.split(".")[-2],
                 ref_file.name.split(".")[-2],
             )
-        else:
-            st.info(
-                "Please use the sidebar to upload Source, Reference and the Translations"
-                " you wish to compare."
-            )
 
-    def __len__(self):
-        return len(self.references)
+    def __len__(self) -> int:
+        return len(self.ref)
 
-    def __getitem__(self, i):
-        return self.sources[i], self.system_x[i], self.system_y[i], self.references[i]
+    def __getitem__(self, i) -> Tuple[str]:
+        return self.src[i], self.system_x[i], self.system_y[i], self.ref[i]
