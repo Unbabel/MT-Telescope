@@ -1,0 +1,52 @@
+[tool.poetry]
+name = "mt-telescope"
+version = "0.0.1"
+description = "A visual platform for contrastive evaluation of machine translation systems"
+authors = ["Ricardo Rei, Craig Stewart, Catarina Farinha, Alon Lavie"]
+license = "Apache-2.0"
+readme = "README.md"
+homepage = "https://github.com/Unbabel/MT-Telescope"
+repository = "https://github.com/Unbabel/MT-Telescope"
+documentation = "https://github.com/Unbabel/MT-Telescope/README.md"
+keywords = [
+    "Machine Translation", 
+    "Evaluation",
+    "Unbabel",
+]
+classifiers = [
+    'Development Status :: 4 - Beta',
+    'Environment :: Console',
+    'Intended Audience :: Science/Research',
+    'Topic :: Scientific/Engineering :: Artificial Intelligence',
+]
+packages = [
+    {include = "telescope"},
+]
+include = [
+    "LICENSE",
+    "pyproject.toml"
+]
+
+[tool.poetry.scripts]
+comet = 'telescope.cli:score'
+
+[tool.poetry.dependencies]
+python = "^3.6.1"
+unbabel-comet = "0.1.0"
+bert-score = "0.3.7"
+torch = "1.4.0"
+fairseq = "0.9.0"
+sacrebleu= ">=1.4.8"
+torchvision= "0.5.0"
+bleurt = { git = "https://github.com/google-research/bleurt.git", branch = "master" }
+stanza = "^1.2"
+streamlit = "^0.79.0"
+plotly = "^4.14.3"
+
+
+[tool.poetry.dev-dependencies]
+coverage = "^5.5"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

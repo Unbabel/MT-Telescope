@@ -14,7 +14,7 @@ class BERTScore(Metric):
         self.system_only = False
         self.lang = lang
 
-    @st.cache
+    #@st.cache
     def streamlit_score(self, src: List[str], cand: List[str], ref: List[str]) -> List[float]:
         scores = bert_score.score(
             cands=cand,

@@ -13,7 +13,7 @@ class chrF(Metric):
     def __init__(self, **kwargs):
         self.system_only = True
 
-    @st.cache
+    #@st.cache
     def streamlit_score(self, src: List[str], cand: List[str], ref: List[str]) -> float:
         chrf = sacrebleu.corpus_chrf(cand, [ref])
         return chrf.score

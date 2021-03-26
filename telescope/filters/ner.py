@@ -25,10 +25,10 @@ class NERFilter(TestsetFilter):
         with st.spinner("Applying Named Entities filter..."):
             if not self.testset.src_lang in STANZA_NER_LANGS:
                 language = self.testset.trg_lang
-                segments = self.testset.references
+                segments = self.testset.ref
             else:
                 language = self.testset.src_lang
-                segments = self.testset.sources
+                segments = self.testset.src
 
             stanza.download(language)
             nlp = stanza.Pipeline(lang=language, processors="tokenize,ner")
@@ -43,7 +43,7 @@ class NERFilter(TestsetFilter):
                 src=[self.testset.src[i] for i in segments_with_ne],
                 system_x=[self.testset.system_x[i] for i in segments_with_ne],
                 system_y=[self.testset.system_y[i] for i in segments_with_ne],
-                ref=[self.testset.references[i] for i in segments_with_ne],
+                ref=[self.testset.ref[i] for i in segments_with_ne],
                 src_lang=self.testset.src_lang,
                 trg_lang=self.testset.trg_lang,
             )

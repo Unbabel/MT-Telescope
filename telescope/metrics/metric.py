@@ -22,14 +22,14 @@ class Metric(metaclass=abc.ABCMeta):
         pass
     
     def pairwise_comparison(self, testset: Testset):
-        with st.spinner(f'Running {self.name}...'):
-            x_result = self.score(
-                testset.src, testset.system_x, testset.ref
-            )
-            y_result = self.score(
-                testset.src, testset.system_y, testset.ref
-            )
-            return PairwiseResult(x_result, y_result, self.name, self.system_only)
+        #with st.spinner(f'Running {self.name}...'):
+        x_result = self.score(
+            testset.src, testset.system_x, testset.ref
+        )
+        y_result = self.score(
+            testset.src, testset.system_y, testset.ref
+        )
+        return PairwiseResult(x_result, y_result, self.name, self.system_only)
 
     def bootstrap_resampling(
         self, 
@@ -79,19 +79,20 @@ class Metric(metaclass=abc.ABCMeta):
 
 
         n = len(testset)
-        st.warning(
-            f"Testset length is too short ({n}). Results are not be reliable, please upload a bigger testset."
-        )
+        #st.warning(
+        #    f"Testset length is too short ({n}). Results are not be reliable, please upload a bigger testset."
+        #)
         ids = list(range(n))
         sample_size = int(n * sample_ratio)
-        if sample_size < 500:
-            st.warning((
-                f"Proportion (P) of the initial sample results in small random samples of size {sample_size}."
-                " Adjusting sample size to 500."
-            ))
-            x_scores, y_scores = [], []
+        #if sample_size < 500:
+        #    st.warning((
+        #        f"Proportion (P) of the initial sample results in small random samples of size {sample_size}."
+        #        " Adjusting sample size to 500."
+        #    ))
 
+        x_scores, y_scores = [], []
         wins = [0, 0, 0]
+
         for _ in range(num_samples):
             # Subsample the gold and system outputs (with replacement)
             reduced_ids = np.random.choice(ids, size=sample_size, replace=True)
