@@ -2,7 +2,5 @@ from telescope.metrics.result import MetricResult
 
 
 class chrFResult(MetricResult):
-    def __init__(
-        self, sys_score: int, src: list, cand: list, ref: list
-    ) -> None:
-        super().__init__(sys_score, None, src, cand, ref)
+    def __str__(self):
+        return f"{self.metric}({self.sys_score}, Beta = 2, ngram_order = 6)"

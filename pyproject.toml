@@ -28,7 +28,7 @@ include = [
 ]
 
 [tool.poetry.scripts]
-comet = 'telescope.cli:score'
+telescope = 'telescope.cli:telescope'
 
 [tool.poetry.dependencies]
 python = "^3.6.1"
@@ -42,10 +42,11 @@ bleurt = { git = "https://github.com/google-research/bleurt.git", branch = "mast
 stanza = "^1.2"
 streamlit = "^0.79.0"
 plotly = "^4.14.3"
-
+silence-tensorflow = "^1.1.1"
 
 [tool.poetry.dev-dependencies]
 coverage = "^5.5"
+black = "^20.8b1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

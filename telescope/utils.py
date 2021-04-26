@@ -1,5 +1,5 @@
-from io import StringIO
 import os
+from io import StringIO
 
 
 def telescope_cache_folder():
@@ -11,7 +11,7 @@ def telescope_cache_folder():
     else:
         raise Exception("HOME environment variable is not defined.")
 
-        
+
 def read_lines(file):
     if file is not None:
         file = StringIO(file.getvalue().decode())

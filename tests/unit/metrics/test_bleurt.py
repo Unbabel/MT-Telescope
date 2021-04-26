@@ -4,15 +4,14 @@ from telescope.metrics.bleurt.metric import BLEURT
 
 
 class TestBLEURT(unittest.TestCase):
-    
-    bleurt = BLEURT("bleurt-tiny-512")
+
+    bleurt = BLEURT(language="en", model="bleurt-tiny-512")
 
     def test_score(self):
-        
-        cand = ['Hi world.', 'This is a Test.']
-        ref = ['Hello world.', 'This is a test.']
-        src = ['Bonjour le monde.', "C'est un test."]
-        
+        cand = ["Hi world.", "This is a Test."]
+        ref = ["Hello world.", "This is a test."]
+        src = ["Bonjour le monde.", "C'est un test."]
+
         result = self.bleurt.score(src, cand, ref)
         expected_seg = [0.2378692328929901, 1.0849038362503052]
         expected_sys = 0.6613865345716476
@@ -25,3 +24,7 @@ class TestBLEURT(unittest.TestCase):
 
     def test_name_property(self):
         self.assertEqual(self.bleurt.name, "BLEURT")
+
+    def test_language_support(self):
+        self.assertTrue(self.bleurt.language_support("en"))
+        self.assertFalse(self.bleurt.language_support("de"))

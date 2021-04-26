@@ -1,34 +1,34 @@
-from typing import List
-
-import pandas as pd
-from telescope.filters.filter import TestsetFilter
-from telescope.testset import Testset
+from telescope.filters.filter import Filter
+from telescope.testset import PairwiseTestset
+from collections import Counter
 
 
-class DuplicatesFilter(TestsetFilter):
+class DuplicatesFilter(Filter):
     name = "duplicates"
-    
-    def __init__(self, testset: Testset):
+
+    def __init__(self, testset: PairwiseTestset, *args):
         self.testset = testset
 
-    def apply_filter(self):
-        df = pd.DataFrame(
-            list(
-                zip(
-                    self.testset.src,
-                    self.testset.ref,
-                    self.testset.system_x,
-                    self.testset.system_y,
-                )
-            ),
-            columns=["sources", "references", "system_x", "system_y"],
-        )
-        df.drop_duplicates(inplace=True)
-        return Testset(
-            src=list(df.sources),
-            system_x=list(df.system_x),
-            system_y=list(df.system_y),
-            ref=list(df.references),
-            src_lang=self.testset.src_lang,
-            trg_lang=self.testset.trg_lang,
+    def apply_filter(self) -> PairwiseTestset:
+        counter = Counter(self.testset.src)
+        sources, system_x, system_y, references = [], [], [], []
+        for src, x, y, ref in self.testset:
+            if counter[src] == 0:
+                continue
+            # if counter > 1 we set it to 0 to skip the next time it appears
+            if counter[src] > 1:
+                counter[src] = 0
+
+            sources.append(src)
+            system_x.append(x)
+            system_y.append(y)
+            references.append(ref)
+
+        return PairwiseTestset(
+            src=sources,
+            system_x=system_x,
+            system_y=system_y,
+            ref=references,
+            language_pair=self.testset.language_pair,
+            filenames=self.testset.filenames,
         )
