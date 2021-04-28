@@ -1,7 +1,7 @@
 import streamlit as st
 from PIL import Image
 
-from telescope.filters import AVAILABLE_FILTERS, ComposedFilter
+from telescope.filters import AVAILABLE_FILTERS
 from telescope.metrics import AVAILABLE_METRICS, COMET
 from telescope.metrics.metric import Metric
 from telescope.plotting import (
@@ -14,7 +14,7 @@ from telescope.testset import PairwiseTestset
 from telescope.metrics.result import PairwiseResult
 
 available_metrics = {m.name: m for m in AVAILABLE_METRICS}
-available_filters = {f.name: f for f in AVAILABLE_FILTERS if f.name != "length"}
+available_filters = {f.name: f for f in AVAILABLE_FILTERS}
 
 # Text/Title
 st.sidebar.title("MT-Telescope LOGO")
@@ -30,7 +30,7 @@ def load_image(image_file):
 metrics = st.sidebar.multiselect(
     "Select the system-level metric you wish to run:",
     list(available_metrics.keys()),
-    default=["COMET", "chrF", "sacreBLEU"],
+    default=["COMET", "chrF", "BLEU"],
 )
 
 metric = st.sidebar.selectbox(
@@ -98,11 +98,16 @@ def hash_metrics(metrics):
     max_entries=cache_max_entries,
 )
 def apply_filters(testset, filters):
-    with st.spinner(f"Applying {filter} filter..."):
-        filters = [available_filters[f](testset, *length_interval) for f in filters]
-        composed_filter = ComposedFilter(testset, filters)
-        return composed_filter.apply_filter()
+    filters = [available_filters[f](testset, *length_interval) for f in filters]
+    for filter in filters:
+        with st.spinner(f"Applying {filter.name} filter..."):
+            testset.apply_filter(filter)
 
+    # HACK
+    # I'll add a new prefix to all testset filenames to "fool" streamlit cache
+    filter_prefix = " ".join([f.name for f in filters]) + str(length_interval)
+    testset.filenames = [filter_prefix + f for f in testset.filenames]
+    return testset
 
 @st.cache(
     hash_funcs={PairwiseTestset: PairwiseTestset.hash_func},
@@ -112,8 +117,8 @@ def apply_filters(testset, filters):
     max_entries=cache_max_entries,
 )
 def run_metric(testset, metric):
-    metric = available_metrics[metric](language=testset.target_language)
-    with st.spinner(f"Running {metric.name}..."):
+    with st.spinner(f"Running {metric}..."):
+        metric = available_metrics[metric](language=testset.target_language)
         return metric.pairwise_comparison(testset)
 
 

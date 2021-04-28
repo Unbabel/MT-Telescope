@@ -18,10 +18,11 @@ class TestNERFilter(unittest.TestCase):
 
     def test_sucess_filter(self):
         filter = NERFilter(self.testset)
-        new_testset = filter.apply_filter()
-        self.assertEqual(len(new_testset), 1)
-        self.assertTrue(len(new_testset) < len(self.testset))
-        src, x, y, ref = new_testset[0]
+        orig_size = len(self.testset)
+        self.testset.apply_filter(filter)
+        self.assertEqual(len(self.testset), 1)
+        self.assertTrue(len(self.testset) < orig_size)
+        src, x, y, ref = self.testset[0]
         self.assertEqual(ref, "I love to live in Lisbon")
 
     def test_unsuported_language(self):

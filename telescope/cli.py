@@ -12,7 +12,7 @@ import json
 
 from telescope.metrics import AVAILABLE_METRICS, PairwiseResult
 from telescope.testset import PairwiseTestset
-from telescope.filters import AVAILABLE_FILTERS, ComposedFilter
+from telescope.filters import AVAILABLE_FILTERS
 from telescope.plotting import (
     plot_segment_comparison,
     plot_pairwise_distributions,
@@ -146,7 +146,9 @@ def compare(
     corpus_size = len(testset)
     if filter:
         filters = [available_filters[f](testset) for f in filter]
-        testset = ComposedFilter(testset, filters).apply_filter()
+        for filter in filters:
+            testset.apply_filter(filter)
+
         click.secho(
             "Filters Successfully applied. Corpus reduced in {:.2f}%.".format(
                 (1 - (len(testset) / corpus_size)) * 100

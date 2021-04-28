@@ -71,22 +71,6 @@ class TestScoreCli(unittest.TestCase):
         result = self.runner.invoke(score, args, catch_exceptions=False)
         self.assertEqual(result.exit_code, 0)
 
-    def test_correct_cli_with_sacrebleu(self):
-        args = [
-            "-s",
-            self.src,
-            "-h",
-            self.hyp,
-            "-r",
-            self.ref,
-            "-l",
-            "en",
-            "-m",
-            "sacreBLEU",
-        ]
-        result = self.runner.invoke(score, args, catch_exceptions=False)
-        self.assertEqual(result.exit_code, 0)
-
     def test_correct_cli_with_zeroedit(self):
         args = [
             "-s",

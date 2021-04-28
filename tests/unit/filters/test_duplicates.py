@@ -19,10 +19,11 @@ class TestDuplicatesFilter(unittest.TestCase):
 
     def test_sucess_filter(self):
         filter = DuplicatesFilter(self.testset)
-        new_testset = filter.apply_filter()
-        self.assertEqual(len(new_testset), 2)
-        self.assertTrue(len(new_testset) < len(self.testset))
-        src, x, y, ref = new_testset[0]
+        orig_size = len(self.testset)
+        self.testset.apply_filter(filter)
+        self.assertEqual(len(self.testset), 2)
+        self.assertTrue(len(self.testset) < orig_size)
+        src, x, y, ref = self.testset[0]
         self.assertEqual(src, "A")
-        src, x, y, ref = new_testset[1]
+        src, x, y, ref = self.testset[1]
         self.assertEqual(src, "cD")

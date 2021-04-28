@@ -1,6 +1,5 @@
-from .duplicates import DuplicatesFilter
-from .length import LengthFilter
 from .ner import NERFilter
-from .terminology import TerminologyFilter
+from .length import LengthFilter
+from .duplicates import DuplicatesFilter
 
-FILTERS = [DuplicatesFilter, LengthFilter, NERFilter, TerminologyFilter]
+AVAILABLE_FILTERS = [NERFilter, LengthFilter, DuplicatesFilter]

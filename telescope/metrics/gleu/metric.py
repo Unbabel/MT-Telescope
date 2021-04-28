@@ -25,6 +25,8 @@ class GLEU(Metric):
         self.tokenize = tokenize
 
     def score(self, src: List[str], cand: List[str], ref: List[str]) -> MetricResult:
+        org_cand = cand
+        org_ref = ref
         if self.tokenize:
             cand = [self.tokenizer(c.strip("\n"))  for c in cand]
             ref = [self.tokenizer(r.strip("\n"))  for r in ref]
@@ -40,7 +42,7 @@ class GLEU(Metric):
         corpus_gleu = sum(segment_gleu) / len(segment_gleu)
         cand = [" ".join(seg) for seg in cand]
         ref = [" ".join(seg) for seg in ref]
-        return MetricResult(corpus_gleu, segment_gleu, src, cand, ref, self.name)
+        return MetricResult(corpus_gleu, segment_gleu, src, org_cand, org_ref, self.name)
 
     def sentence_gleu(self, reference, hypothesis, min_len=1, max_len=4):
         references = [

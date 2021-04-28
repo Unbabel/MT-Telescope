@@ -43,6 +43,9 @@ stanza = "^1.2"
 streamlit = "^0.79.0"
 plotly = "^4.14.3"
 silence-tensorflow = "^1.1.1"
+numpy = "<1.17"
+watchdog = "^2.0.3"
+tensorboard = "2.2.0"
 
 [tool.poetry.dev-dependencies]
 coverage = "^5.5"

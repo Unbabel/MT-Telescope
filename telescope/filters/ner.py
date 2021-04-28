@@ -1,6 +1,7 @@
 import stanza
 from telescope.filters.filter import Filter
-from telescope.testset import PairwiseTestset
+from telescope.testset import Testset
+from typing import List
 
 STANZA_NER_LANGS = ["ar", "zh", "nl", "en", "fr", "de", "ru", "uk"]
 
@@ -8,7 +9,7 @@ STANZA_NER_LANGS = ["ar", "zh", "nl", "en", "fr", "de", "ru", "uk"]
 class NERFilter(Filter):
     name = "named-entities"
 
-    def __init__(self, testset: PairwiseTestset, *args):
+    def __init__(self, testset: Testset, *args):
         super().__init__(testset)
         self.set_language()
         stanza.download(self.language)
@@ -26,18 +27,11 @@ class NERFilter(Filter):
                 "{} is not supperted by Stanza NER.".format(self.testset.language_pair)
             )
 
-    def apply_filter(self) -> PairwiseTestset:
+    def apply_filter(self) -> List[int]:
         segments_with_ne = []
         for i, segment in enumerate(self.segments):
             doc = self.engine(segment)
             if doc.ents:
                 segments_with_ne.append(i)
 
-        return PairwiseTestset(
-            src=[self.testset.src[i] for i in segments_with_ne],
-            system_x=[self.testset.system_x[i] for i in segments_with_ne],
-            system_y=[self.testset.system_y[i] for i in segments_with_ne],
-            ref=[self.testset.ref[i] for i in segments_with_ne],
-            language_pair=self.testset.language_pair,
-            filenames=self.testset.filenames,
-        )
+        return segments_with_ne

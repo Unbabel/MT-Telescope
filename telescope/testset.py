@@ -42,7 +42,7 @@ class Testset:
         return self.src[i], self.mt[i], self.ref[i]
 
     def apply_filter(self, filter):
-        to_keep = filter.apply_filter(self.src, self.ref)
+        to_keep = filter.apply_filter()
         self.src = [self.src[idx] for idx in to_keep]
         self.mt = [self.mt[idx] for idx in to_keep]
         self.ref = [self.ref[idx] for idx in to_keep]
@@ -129,7 +129,7 @@ class PairwiseTestset(Testset):
         return self.src[i], self.system_x[i], self.system_y[i], self.ref[i]
 
     def apply_filter(self, filter):
-        to_keep = filter.apply_filter(self.src, self.ref)
+        to_keep = filter.apply_filter()
         self.src = [self.src[idx] for idx in to_keep]
         self.system_x = [self.system_x[idx] for idx in to_keep]
         self.system_y = [self.system_y[idx] for idx in to_keep]

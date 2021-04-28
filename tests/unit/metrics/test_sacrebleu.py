@@ -13,13 +13,13 @@ class TestSacreBLEU(unittest.TestCase):
         ref = ["Hello world.", "This is a test."]
         src = ["Bonjour le monde.", "C'est un test."]  # Will be ignored
 
-        expected_sys = 39.13
+        expected_sys = 0.3913
         result = self.bleu.score(src, cand, ref)
-        self.assertAlmostEqual(result.sys_score, expected_sys, places=2)
+        self.assertAlmostEqual(result.sys_score, expected_sys, places=3)
         self.assertFalse(result.seg_scores)
         self.assertListEqual(result.ref, ref)
         self.assertListEqual(result.src, src)
         self.assertListEqual(result.cand, cand)
 
     def test_name_property(self):
-        self.assertEqual(self.bleu.name, "sacreBLEU")
+        self.assertEqual(self.bleu.name, "BLEU")

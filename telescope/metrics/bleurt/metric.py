@@ -47,7 +47,7 @@ class BLEURT(Metric):
         return language == "en"
 
     def score(self, src, cand, ref):
-        scores = self.scorer.score(ref, cand)
+        scores = self.scorer.score(references=ref, candidates=cand)
         return BLEURTResult(
             sum(scores) / len(scores), scores, src, cand, ref, self.name, self.model
         )

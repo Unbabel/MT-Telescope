@@ -1,16 +1,16 @@
 import unittest
-from telescope.testset import Testset
+from telescope.testset import PairwiseTestset
 
 
 class TestTestset(unittest.TestCase):
     
-    testset = Testset(
+    testset = PairwiseTestset(
         src=['Bonjour le monde.', "C'est un test."],
         system_x=['Greetings world', 'This is an experiment.'],
         system_y=['Hi world.', 'This is a Test.'],
         ref=['Hello world.', 'This is a test.'],
-        src_lang="fr",
-        trg_lang="en"
+        language_pair="en-fr",
+        filenames=["src.txt", "google.txt", "unbabel.txt", "ref.txt"]
     )
 
     def test_length(self):
