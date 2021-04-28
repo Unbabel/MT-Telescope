@@ -4,17 +4,12 @@ MT Telescope is an improved version of ml-metrics where you can evaluate your MT
 
 ## Install:
 Create a virtual environment and make sure you have [poetry](https://python-poetry.org/docs/#installation) installed.
-Them configure poetry to use our internal pypi:
-
-```bash
-poetry config http-basic.unbabel USER PASSWORD # credentials available on 1password 
-```
 
 Finally run:
 
 ```bash
-git clone https://gitlab.com/Unbabel/ai-tech-qe-metrics/mt-telescope
-cd mt-telescope
+git clone https://github.com/Unbabel/MT-Telescope
+cd MT-Telescope
 poetry install
 ```
 
