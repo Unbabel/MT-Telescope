@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <p align="center">
   <img src="https://user-images.githubusercontent.com/17256847/124762084-66212200-df2a-11eb-92ce-edbebfe9d4e2.jpg">
   <br />
@@ -7,6 +8,13 @@
   <a href=""><img alt="PyPI" src="https://img.shields.io/pypi/v/mt-telescope" /></a>
   <a href="https://github.com/psf/black"><img alt="Code Style" src="https://img.shields.io/badge/code%20style-black-black" /></a>
 </p>
+=======
+![mt-telecsope](https://user-images.githubusercontent.com/17256847/124762084-66212200-df2a-11eb-92ce-edbebfe9d4e2.jpg)
+
+Work in progress. We will update with a final package version in August 2021
+
+# MT-Telescope
+>>>>>>> 18a62337617da438ec4c4ee4d87a33970494b50c
 
 
 MT-Telescope is a toolkit for comparative analysis of MT systems that provides a number of tools that add rigor and depth to MT evaluation. With this package we endeavour to make it easier for researchers and industry practitioners to compare MT systems by giving you easy access to:
