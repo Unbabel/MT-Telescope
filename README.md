@@ -8,8 +8,6 @@
   <a href="https://github.com/psf/black"><img alt="Code Style" src="https://img.shields.io/badge/code%20style-black-black" /></a>
 </p>
 
-Work in progress. We will update with a final package version in August 2021
-
 # MT-Telescope
 
 MT-Telescope is a toolkit for comparative analysis of MT systems that provides a number of tools that add rigor and depth to MT evaluation. With this package we endeavour to make it easier for researchers and industry practitioners to compare MT systems by giving you easy access to:
