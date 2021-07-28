@@ -11,8 +11,6 @@
 Work in progress. We will update with a final package version in August 2021
 
 # MT-Telescope
->>>>>>> 18a62337617da438ec4c4ee4d87a33970494b50c
-
 
 MT-Telescope is a toolkit for comparative analysis of MT systems that provides a number of tools that add rigor and depth to MT evaluation. With this package we endeavour to make it easier for researchers and industry practitioners to compare MT systems by giving you easy access to:
 
