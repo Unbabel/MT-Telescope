@@ -9,16 +9,17 @@
 </p>
 
 
-Proper MT Evaluation is very for scientific progress but its often overlooked. In this package we pretend to make it easier for researchers and industry practitioners to compare MT systems by giving you easy access to:
+MT-Telescope is a toolkit for comparative analysis of MT systems that provides a number of tools that add rigor and depth to MT evaluation. With this package we endeavour to make it easier for researchers and industry practitioners to compare MT systems by giving you easy access to:
 
 1) SOTA MT evaluation metrics such as COMET  [(rei, et al 2020)](https://aclanthology.org/2020.emnlp-main.213/).
 2) Statistical tests such as bootstrap resampling [(Koehn, et al 2004)](https://aclanthology.org/W04-3250/).
 3) Dynamic Filters to select parts of your testset with specific phenomena
 4) Visual interface/plots to compare systems side-by-side segment-by-segment.
 
-Please read the following papers to learn more about how to perform better MT-Evaluation:
+We highly recommend reading the following papers to learn more about how to perform better MT-Evaluation:
 - [Scientific Credibility of Machine Translation Research: A Meta-Evaluation of 769 Papers](https://arxiv.org/pdf/2106.15195.pdf)
 - [To Ship or Not to Ship: An Extensive Evaluation of Automatic Metrics for Machine Translation](https://arxiv.org/pdf/2107.10821.pdf)
+
 
 ## Install:
 

@@ -60,12 +60,12 @@ class TestScoreCli(unittest.TestCase):
             "-r",
             self.ref,
             "-l",
-            "de",
+            "ka",
             "-m",
-            "BLEURT",
+            "Prism",
         ]
         result = self.runner.invoke(score, args, catch_exceptions=False)
-        expected_stdout = "Error: BLEURT does not support 'de'\n"
+        expected_stdout = "Error: Prism does not support 'ka'\n"
         self.assertEqual(result.stdout, expected_stdout)
         self.assertEqual(result.exit_code, 1)
 

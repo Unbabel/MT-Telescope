@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mt-telescope"
-version = "0.0.1"
+version = "0.0.1rc1"
 description = "A visual platform for contrastive evaluation of machine translation systems"
 authors = ["Ricardo Rei, Craig Stewart, Catarina Farinha, Alon Lavie"]
 license = "Apache-2.0"
@@ -37,20 +37,21 @@ bert-score = "0.3.7"
 torch = ">=1.6.0"
 fairseq = "0.9.0"
 sacrebleu= ">=1.4.8"
-torchvision= "0.8.0"
-bleurt = { git = "https://github.com/google-research/bleurt.git", branch = "master" }
 stanza = "^1.2"
 streamlit = "^0.79.0"
 plotly = "^4.14.3"
-silence-tensorflow = "^1.1.1"
 numpy = "<1.20.0"
-watchdog = "^2.0.3"
-tensorboard = "2.2.0"
 pytorch-nlp = "0.5.0"
+scipy = "1.5.0"
 
 [tool.poetry.dev-dependencies]
 coverage = "^5.5"
 black = "^20.8b1"
+bleurt = { git = "https://github.com/google-research/bleurt.git", branch = "master" }
+torchvision= "0.8.0"
+silence-tensorflow = "^1.1.1"
+tensorboard = "2.2.0"
+watchdog = "^2.0.3"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

@@ -305,8 +305,9 @@ class Prism(Metric):
         if not self.language_support(language):
             raise Exception(f"{language} is not supported by {self.name}.")
 
+    @classmethod
     def language_support(self, language: str) -> bool:
-        return language in MODELS[self.model_hash]["langs"]
+        return language in MODELS["8412b2044da4b9b2c0a8ce87b305d0d1"]["langs"]
 
     def identifier(self):
         if self.model_hash in MODELS:

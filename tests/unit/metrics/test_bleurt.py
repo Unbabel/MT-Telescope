@@ -12,6 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""
 import unittest
 
 from telescope.metrics.bleurt.metric import BLEURT
@@ -42,3 +43,4 @@ class TestBLEURT(unittest.TestCase):
     def test_language_support(self):
         self.assertTrue(self.bleurt.language_support("en"))
         self.assertFalse(self.bleurt.language_support("de"))
+"""
