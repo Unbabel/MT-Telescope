@@ -1,8 +1,34 @@
-# MT-Telescope
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/17256847/124762084-66212200-df2a-11eb-92ce-edbebfe9d4e2.jpg">
+  <br />
+  <br />
+  <a href="https://github.com/Unbabel/MT-Telescope/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/github/license/Unbabel/MT-Telescope" /></a>
+  <a href="https://github.com/Unbabel/MT-Telescope/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/Unbabel/MT-Telescope" /></a>
+  <a href=""><img alt="PyPI" src="https://img.shields.io/pypi/v/mt-telescope" /></a>
+  <a href="https://github.com/psf/black"><img alt="Code Style" src="https://img.shields.io/badge/code%20style-black-black" /></a>
+</p>
 
-MT Telescope is an improved version of ml-metrics where you can evaluate your MT systems and perform pairwise comparisons between them with your command line and/or a web browser.
+
+Proper MT Evaluation is very for scientific progress but its often overlooked. In this package we pretend to make it easier for researchers and industry practitioners to compare MT systems by giving you easy access to:
+
+1) SOTA MT evaluation metrics such as COMET  [(rei, et al 2020)](https://aclanthology.org/2020.emnlp-main.213/).
+2) Statistical tests such as bootstrap resampling [(Koehn, et al 2004)](https://aclanthology.org/W04-3250/).
+3) Dynamic Filters to select parts of your testset with specific phenomena
+4) Visual interface/plots to compare systems side-by-side segment-by-segment.
+
+Please read the following papers to learn more about how to perform better MT-Evaluation:
+- [Scientific Credibility of Machine Translation Research: A Meta-Evaluation of 769 Papers](https://arxiv.org/pdf/2106.15195.pdf)
+- [To Ship or Not to Ship: An Extensive Evaluation of Automatic Metrics for Machine Translation](https://arxiv.org/pdf/2107.10821.pdf)
 
 ## Install:
+
+### Via pip:
+
+```bash
+pip install mt-telescope
+```
+
+### Locally:
 Create a virtual environment and make sure you have [poetry](https://python-poetry.org/docs/#installation) installed.
 
 Finally run:
@@ -18,7 +44,7 @@ poetry install
 To get the system level scores for a particular MT simply run `telescope score`.
 
 ```bash
-
+telescope score -s {path/to/sources} -h {path/to/translations} -r {path/to/references} -l {target_language} -m COMET -m chrF
 ```
 
 ## Comparing two systems:
