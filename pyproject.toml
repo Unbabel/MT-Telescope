@@ -32,20 +32,21 @@ telescope = 'telescope.cli:telescope'
 
 [tool.poetry.dependencies]
 python = "^3.6.1"
-unbabel-comet = "0.1.0"
+unbabel-comet = "1.0.0rc1"
 bert-score = "0.3.7"
-torch = "1.4.0"
+torch = ">=1.6.0"
 fairseq = "0.9.0"
 sacrebleu= ">=1.4.8"
-torchvision= "0.5.0"
+torchvision= "0.8.0"
 bleurt = { git = "https://github.com/google-research/bleurt.git", branch = "master" }
 stanza = "^1.2"
 streamlit = "^0.79.0"
 plotly = "^4.14.3"
 silence-tensorflow = "^1.1.1"
-numpy = "<1.17"
+numpy = "<1.20.0"
 watchdog = "^2.0.3"
 tensorboard = "2.2.0"
+pytorch-nlp = "0.5.0"
 
 [tool.poetry.dev-dependencies]
 coverage = "^5.5"
