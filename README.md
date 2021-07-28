@@ -26,8 +26,10 @@ We highly recommend reading the following papers to learn more about how to perf
 ### Via pip:
 
 ```bash
-pip install mt-telescope
+pip install mt-telescope==0.0.1rc1
 ```
+
+Note: This is a pre-release currently.
 
 ### Locally:
 Create a virtual environment and make sure you have [poetry](https://python-poetry.org/docs/#installation) installed.
@@ -94,7 +96,7 @@ telescope compare \
   -y path/to/system-y \
   -r path/to/ref/file.txt \
   -l en \
-  -m BLEU -m chrF -m BERTScore
+  -m BLEU -m chrF -m BERTScore -m COMET
 ```
 
 #### Example 2: Saving a comparison report
@@ -116,3 +118,16 @@ To run a web interface simply run:
 ```bash
 streamlit run app.py
 ```
+
+
+# Cite:
+
+@inproceedings{rei-etal-2021-mt,
+  author = {Rei, Ricardo  and  Stewart, Craig  and  Farinha, Ana C  and  Lavie, Alon},
+    title = "{MT}-{T}elescope: {A}n interactive platform for contrastive evaluation of {MT} systems",
+    booktitle = "Proceedings of the 59th Annual Meeting of the Association for Computational Linguistics and the 11th International Joint Conference on Natural Language Processing (Demonstrations)",
+    month = aug,
+    year = "2021",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+}
