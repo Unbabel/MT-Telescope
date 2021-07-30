@@ -123,12 +123,17 @@ streamlit run app.py
 
 # Cite:
 
+```
 @inproceedings{rei-etal-2021-mt,
-  author = {Rei, Ricardo  and  Stewart, Craig  and  Farinha, Ana C  and  Lavie, Alon},
     title = "{MT}-{T}elescope: {A}n interactive platform for contrastive evaluation of {MT} systems",
-    booktitle = "Proceedings of the 59th Annual Meeting of the Association for Computational Linguistics and the 11th International Joint Conference on Natural Language Processing (Demonstrations)",
+    author = {Rei, Ricardo  and  Stewart, Craig  and  Farinha, Ana C  and  Lavie, Alon},
+    booktitle = "Proceedings of the 59th Annual Meeting of the Association for Computational Linguistics and the 11th International Joint Conference on Natural Language Processing: System Demonstrations",
     month = aug,
     year = "2021",
     address = "Online",
     publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2021.acl-demo.9",
+    doi = "10.18653/v1/2021.acl-demo.9",
+    pages = "73--80",
 }
+```
