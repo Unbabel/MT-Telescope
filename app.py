@@ -33,7 +33,7 @@ def load_image(image_file):
     img = Image.open(image_file)
     return img
     
-logo = load_image('data/mt-telescope-logo.jpg')
+logo = load_image('data/mt-telescope-logo.jpeg')
 st.sidebar.image(logo)
 
 # --------------------  APP Settings --------------------
