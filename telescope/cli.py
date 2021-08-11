@@ -280,3 +280,11 @@ def score(
 
     for result in results:
         click.secho(str(result), fg="yellow")
+
+
+@telescope.command()
+@click.pass_context
+def streamlit(ctx):
+    file_path = os.path.realpath(__file__)
+    script_path = '/'.join(file_path.split("/")[:-1]) + "/app.py"
+    os.system("streamlit run " + script_path)

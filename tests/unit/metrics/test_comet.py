@@ -22,7 +22,7 @@ torch.cuda.is_available = lambda: False
 
 class TestCOMET(unittest.TestCase):
 
-    comet = COMET(modelname="wmt21-small-da-152012")
+    comet = COMET(modelname="wmt21-cometinho-da")
 
     def test_score(self):
         # README example!

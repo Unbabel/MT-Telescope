@@ -26,7 +26,7 @@ from comet import download_model, load_from_checkpoint
 if "COMET_MODEL" in os.environ:
     MODELNAME = os.environ["COMET_MODEL"]
 else:
-    MODELNAME = "wmt21-small-da-152012"
+    MODELNAME = "wmt20-comet-da"
 
 
 class COMET(Metric):

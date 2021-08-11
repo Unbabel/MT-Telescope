@@ -117,9 +117,13 @@ telescope compare \
 
 To run a web interface simply run:
 ```bash
-streamlit run app.py
+telescope streamlit
 ```
 
+Some metrics like COMET can take some time to run inside streamlit. You can switch the COMET model to a more lightweight model with the following env variable:
+```bash
+export COMET_MODEL=wmt21-cometinho-da
+```
 
 # Cite:
 
