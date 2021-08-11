@@ -27,7 +27,7 @@ We highly recommend reading the following papers to learn more about how to perf
 ### Via pip:
 
 ```bash
-pip install mt-telescope==0.0.1rc1
+pip install mt-telescope
 ```
 
 Note: This is a pre-release currently.
