@@ -69,7 +69,7 @@ Options:
   -y, --system_y FILENAME         System Y MT outputs.  [required]
   -r, --reference FILENAME        Reference segments.  [required]
   -l, --language TEXT             Language of the evaluated text.  [required]
-  -m, --metric [COMET|sacreBLEU|chrF|ZeroEdit|BLEURT|BERTScore|TER|Prism|GLEU]
+  -m, --metric [COMET|sacreBLEU|chrF|ZeroEdit|BERTScore|TER|Prism|GLEU]
                                   MT metric to run.  [required]
   -f, --filter [named-entities|duplicates]
                                   MT metric to run.
