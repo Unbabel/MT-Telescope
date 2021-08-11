@@ -18,10 +18,12 @@ from PIL import Image
 from telescope.filters import AVAILABLE_FILTERS
 from telescope.metrics import AVAILABLE_METRICS
 from telescope.metrics.result import PairwiseResult
-from telescope.plotting import (plot_bootstraping_result,
-                                plot_bucket_comparison,
-                                plot_pairwise_distributions,
-                                plot_segment_comparison)
+from telescope.plotting import (
+    plot_bootstraping_result,
+    plot_bucket_comparison,
+    plot_pairwise_distributions,
+    plot_segment_comparison,
+)
 from telescope.testset import PairwiseTestset
 
 available_metrics = {m.name: m for m in AVAILABLE_METRICS}
@@ -32,8 +34,9 @@ available_filters = {f.name: f for f in AVAILABLE_FILTERS}
 def load_image(image_file):
     img = Image.open(image_file)
     return img
-    
-logo = load_image('data/mt-telescope-logo.jpg')
+
+
+logo = load_image("data/mt-telescope-logo.jpg")
 st.sidebar.image(logo)
 
 # --------------------  APP Settings --------------------
@@ -118,6 +121,7 @@ def apply_filters(testset, filters):
     filter_prefix = " ".join([f.name for f in filters]) + str(length_interval)
     testset.filenames = [filter_prefix + f for f in testset.filenames]
     return testset
+
 
 @st.cache(
     hash_funcs={PairwiseTestset: PairwiseTestset.hash_func},

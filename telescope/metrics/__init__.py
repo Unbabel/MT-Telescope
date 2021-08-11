@@ -1,7 +1,8 @@
 from .sacrebleu import sacreBLEU
 from .chrf import chrF
 from .zero_edit import ZeroEdit
-#from .bleurt import BLEURT
+
+# from .bleurt import BLEURT
 from .bertscore import BERTScore
 from .comet import COMET
 from .ter import TER
@@ -15,7 +16,7 @@ AVAILABLE_METRICS = [
     sacreBLEU,
     chrF,
     ZeroEdit,
-    #BLEURT,
+    # BLEURT,
     BERTScore,
     TER,
     Prism,

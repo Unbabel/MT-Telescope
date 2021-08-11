@@ -28,5 +28,5 @@ class sacreBLEU(Metric):
     def score(self, src: List[str], cand: List[str], ref: List[str]) -> BLEUResult:
         bleu = sacrebleu.corpus_bleu(cand, [ref])
         return BLEUResult(
-            bleu.score/100, [], src, cand, ref, self.name, bleu.precisions, bleu.bp
+            bleu.score / 100, [], src, cand, ref, self.name, bleu.precisions, bleu.bp
         )

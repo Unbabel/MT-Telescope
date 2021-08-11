@@ -36,6 +36,6 @@ class DuplicatesFilter(Filter):
             # if counter > 1 we set it to 0 to skip the next time it appears
             if counter[src] > 1:
                 counter[src] = 0
-            
+
             sources.append(i)
         return sources

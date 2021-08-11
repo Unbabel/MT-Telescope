@@ -34,13 +34,9 @@ class COMET(Metric):
     name = "COMET"
     system_only = False
 
-    def __init__(
-        self, language=None, modelname: str = MODELNAME, **kwargs
-    ):
+    def __init__(self, language=None, modelname: str = MODELNAME, **kwargs):
         self.modelname = modelname
-        self.model = load_from_checkpoint(
-            download_model(modelname)
-        )
+        self.model = load_from_checkpoint(download_model(modelname))
 
     def score(self, src: List[str], cand: List[str], ref: List[str]) -> COMETResult:
         data = {"src": src, "mt": cand, "ref": ref}

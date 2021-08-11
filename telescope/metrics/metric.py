@@ -16,8 +16,7 @@ import abc
 from typing import List, Tuple
 
 import numpy as np
-from telescope.metrics.result import (BootstrapResult, MetricResult,
-                                      PairwiseResult)
+from telescope.metrics.result import BootstrapResult, MetricResult, PairwiseResult
 from telescope.testset import PairwiseTestset
 
 
@@ -51,7 +50,11 @@ class Metric(metaclass=abc.ABCMeta):
 
     @classmethod
     def bootstrap_resampling(
-        cls, testset: PairwiseTestset, num_samples: int, sample_ratio: float, pairwise_result: PairwiseResult = None
+        cls,
+        testset: PairwiseTestset,
+        num_samples: int,
+        sample_ratio: float,
+        pairwise_result: PairwiseResult = None,
     ):
 
         """

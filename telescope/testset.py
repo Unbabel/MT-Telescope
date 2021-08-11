@@ -61,6 +61,7 @@ class Testset:
         self.mt = [self.mt[idx] for idx in to_keep]
         self.ref = [self.ref[idx] for idx in to_keep]
 
+
 class PairwiseTestset(Testset):
     def __init__(
         self,

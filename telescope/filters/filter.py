@@ -28,4 +28,3 @@ class Filter:
     def apply_filter(self) -> List[int]:
         """ Returns the indexes of elements to keep """
         return NotImplementedError
-

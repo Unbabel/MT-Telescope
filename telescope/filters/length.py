@@ -22,9 +22,7 @@ from telescope.testset import Testset
 class LengthFilter(Filter):
     name = "length"
 
-    def __init__(
-        self, testset: Testset, min_value: float, max_value: float, *args
-    ):
+    def __init__(self, testset: Testset, min_value: float, max_value: float, *args):
         super().__init__(testset)
         self.min_value = min_value
         self.max_value = max_value
@@ -40,7 +38,11 @@ class LengthFilter(Filter):
             retbins=True,
         )
         length_buckets = list(dataframe["bins"])
-        return [i for i in range(len(self.testset)) 
-        if (length_buckets[i] >= self.min_value
-            and length_buckets[i] <= self.max_value)
+        return [
+            i
+            for i in range(len(self.testset))
+            if (
+                length_buckets[i] >= self.min_value
+                and length_buckets[i] <= self.max_value
+            )
         ]
