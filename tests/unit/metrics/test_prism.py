@@ -12,6 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""
 import unittest
 
 import torch
@@ -51,3 +52,4 @@ class TestPrism(unittest.TestCase):
             Prism("is")
         the_exception = cm.exception
         self.assertEqual(str(the_exception), "is is not supported by Prism.")
+"""

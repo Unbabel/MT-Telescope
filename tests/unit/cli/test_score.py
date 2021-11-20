@@ -51,23 +51,23 @@ class TestScoreCli(unittest.TestCase):
     #    result = self.runner.invoke(score, args, catch_exceptions=False)
     #    self.assertEqual(result.exit_code, 0)
 
-    def test_unsupported_language(self):
-        args = [
-            "-s",
-            self.src,
-            "-h",
-            self.hyp,
-            "-r",
-            self.ref,
-            "-l",
-            "ka",
-            "-m",
-            "Prism",
-        ]
-        result = self.runner.invoke(score, args, catch_exceptions=False)
-        expected_stdout = "Error: Prism does not support 'ka'\n"
-        self.assertEqual(result.stdout, expected_stdout)
-        self.assertEqual(result.exit_code, 1)
+    #def test_unsupported_language(self):
+    #    args = [
+    #        "-s",
+    #        self.src,
+    #        "-h",
+    #        self.hyp,
+    #        "-r",
+    #        self.ref,
+    #        "-l",
+    #        "ka",
+    #        "-m",
+    #        "Prism",
+    #    ]
+    #    result = self.runner.invoke(score, args, catch_exceptions=False)
+    #    expected_stdout = "Error: Prism does not support 'ka'\n"
+    #    self.assertEqual(result.stdout, expected_stdout)
+    #    self.assertEqual(result.exit_code, 1)
 
     def test_correct_cli_with_bertscore(self):
         args = [

@@ -6,7 +6,7 @@ from .zero_edit import ZeroEdit
 from .bertscore import BERTScore
 from .comet import COMET
 from .ter import TER
-from .prism import Prism
+# from .prism import Prism
 from .gleu import GLEU
 from .result import MetricResult, PairwiseResult, BootstrapResult
 
@@ -19,6 +19,6 @@ AVAILABLE_METRICS = [
     # BLEURT,
     BERTScore,
     TER,
-    Prism,
+    # Prism,
     GLEU,
 ]
