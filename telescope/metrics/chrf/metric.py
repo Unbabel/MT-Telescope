@@ -26,4 +26,4 @@ class chrF(Metric):
 
     def score(self, src: List[str], cand: List[str], ref: List[str]) -> chrFResult:
         chrf = sacrebleu.corpus_chrf(cand, [ref])
-        return chrFResult(chrf.score, [], src, cand, ref, self.name)
+        return chrFResult(chrf.score/100, [], src, cand, ref, self.name)

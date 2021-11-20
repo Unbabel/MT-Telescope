@@ -33,7 +33,7 @@ from telescope.plotting import (
 )
 
 available_metrics = {m.name: m for m in AVAILABLE_METRICS}
-available_filters = {f.name: f for f in AVAILABLE_FILTERS if f.name != "length"}
+available_filters = {f.name: f for f in AVAILABLE_FILTERS}
 
 
 def readlines(ctx, param, file: click.File) -> List[str]:
@@ -104,6 +104,20 @@ def telescope():
     help="MT metric to run.",
 )
 @click.option(
+    "--length_min_val",
+    type=float,
+    required=False,
+    default=0.0,
+    help="Min interval value for length filtering.",
+)
+@click.option(
+    "--length_max_val",
+    type=float,
+    required=False,
+    default=0.0,
+    help="Max interval value for length filtering.",
+)
+@click.option(
     "--seg_metric",
     type=click.Choice([m.name for m in available_metrics.values() if m.segment_level]),
     required=False,
@@ -142,6 +156,8 @@ def compare(
     language: str,
     metric: Union[Tuple[str], str],
     filter: Union[Tuple[str], str],
+    length_min_val: float,
+    length_max_val: float,
     seg_metric: str,
     output_folder: str,
     bootstrap: bool,
@@ -158,10 +174,17 @@ def compare(
     )
     corpus_size = len(testset)
     if filter:
-        filters = [available_filters[f](testset) for f in filter]
+        filters = [available_filters[f](testset) for f in filter if f != "length"]
+        if "length" in filter:
+            filters.append(available_filters["length"](testset, int(length_min_val*100), int(length_max_val*100)))
+        
         for filter in filters:
             testset.apply_filter(filter)
 
+        if (1 - (len(testset) / corpus_size)) * 100 == 100:
+            click.secho("The current filters reduce the Corpus on 100%!", fg="ref")
+            return
+    
         click.secho(
             "Filters Successfully applied. Corpus reduced in {:.2f}%.".format(
                 (1 - (len(testset) / corpus_size)) * 100
@@ -233,8 +256,8 @@ def compare(
     callback=readlines,
 )
 @click.option(
-    "--hypothesis",
-    "-h",
+    "--translation",
+    "-t",
     required=True,
     help="MT outputs.",
     type=click.File(),
@@ -264,7 +287,7 @@ def compare(
 )
 def score(
     source: List[str],
-    hypothesis: List[str],
+    translation: List[str],
     reference: List[str],
     language: str,
     metric: Union[Tuple[str], str],
@@ -276,7 +299,7 @@ def score(
     results = []
     for metric in metrics:
         metric = available_metrics[metric](language)
-        results.append(metric.score(source, hypothesis, reference))
+        results.append(metric.score(source, translation, reference))
 
     for result in results:
         click.secho(str(result), fg="yellow")

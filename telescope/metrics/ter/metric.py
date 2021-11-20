@@ -26,4 +26,4 @@ class TER(Metric):
 
     def score(self, src: List[str], cand: List[str], ref: List[str]) -> TERResult:
         ter = sacrebleu.corpus_ter(cand, [ref])
-        return TERResult(ter.score, [], src, cand, ref, self.name, ter.num_edits)
+        return TERResult(ter.score/100, [], src, cand, ref, self.name, ter.num_edits)

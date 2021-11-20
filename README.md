@@ -48,7 +48,7 @@ poetry install --no-dev
 To get the system level scores for a particular MT simply run `telescope score`.
 
 ```bash
-telescope score -s {path/to/sources} -h {path/to/translations} -r {path/to/references} -l {target_language} -m COMET -m chrF
+telescope score -s {path/to/sources} -t {path/to/translations} -r {path/to/references} -l {target_language} -m COMET -m chrF
 ```
 
 ## Comparing two systems:

@@ -101,7 +101,8 @@ def update_buckets(
     # plot
     barWidth = 0.85
     names = ("System X", "System Y")
-
+    plt.clf()
+    
     ax1 = plt.bar(r, T4Bars, color=T4_COLOR, edgecolor="white", width=barWidth)
     ax2 = plt.bar(
         r, T3Bars, bottom=T4Bars, color=T3_COLOR, edgecolor="white", width=barWidth

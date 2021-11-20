@@ -16,7 +16,7 @@ from collections import Counter
 from itertools import chain
 from typing import List
 
-from sacrebleu import TOKENIZERS
+from sacrebleu.metrics.bleu import _get_tokenizer
 from telescope.metrics.metric import Metric
 from telescope.metrics.result import MetricResult
 
@@ -29,11 +29,11 @@ class GLEU(Metric):
     def __init__(self, language: str, lowercase: bool = False, tokenize: bool = True):
         super().__init__(language)
         if language == "zh":
-            self.tokenizer = TOKENIZERS["zh"]()
+            self.tokenizer = _get_tokenizer("zh")()
         elif language == "ja":
-            self.tokenizer = TOKENIZERS["ja-mecab"]()
+            self.tokenizer = _get_tokenizer("ja-mecab")()
         else:
-            self.tokenizer = TOKENIZERS["13a"]()
+            self.tokenizer = _get_tokenizer("13a")()
 
         self.lowercase = lowercase
         self.tokenize = tokenize

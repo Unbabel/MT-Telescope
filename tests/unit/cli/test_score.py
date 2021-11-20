@@ -33,7 +33,7 @@ class TestScoreCli(unittest.TestCase):
         args = [
             "-s",
             self.src,
-            "-h",
+            "-t",
             self.hyp,
             "-r",
             self.ref,
@@ -73,7 +73,7 @@ class TestScoreCli(unittest.TestCase):
         args = [
             "-s",
             self.src,
-            "-h",
+            "-t",
             self.hyp,
             "-r",
             self.ref,
@@ -89,7 +89,7 @@ class TestScoreCli(unittest.TestCase):
         args = [
             "-s",
             self.src,
-            "-h",
+            "-t",
             self.hyp,
             "-r",
             self.ref,
@@ -105,7 +105,7 @@ class TestScoreCli(unittest.TestCase):
         args = [
             "-s",
             self.src,
-            "-h",
+            "-t",
             self.hyp,
             "-r",
             self.ref,
@@ -121,7 +121,7 @@ class TestScoreCli(unittest.TestCase):
         args = [
             "-s",
             self.src,
-            "-h",
+            "-t",
             self.hyp,
             "-r",
             self.ref,

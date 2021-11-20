@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import streamlit as st
+import requests
+
 from PIL import Image
 
 from telescope.filters import AVAILABLE_FILTERS
@@ -31,12 +33,11 @@ available_filters = {f.name: f for f in AVAILABLE_FILTERS}
 
 
 @st.cache
-def load_image(image_file):
-    img = Image.open(image_file)
+def load_image(image_url):
+    img = Image.open(requests.get(image_url, stream=True).raw)
     return img
 
-
-logo = load_image("data/mt-telescope-logo.jpg")
+logo = load_image("https://github.com/Unbabel/MT-Telescope/blob/master/data/mt-telescope-logo.jpg?raw=true")
 st.sidebar.image(logo)
 
 # --------------------  APP Settings --------------------

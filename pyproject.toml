@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mt-telescope"
-version = "0.0.1rc1"
+version = "0.0.1"
 description = "A visual platform for contrastive evaluation of machine translation systems"
 authors = ["Ricardo Rei, Craig Stewart, Catarina Farinha, Alon Lavie"]
 license = "Apache-2.0"

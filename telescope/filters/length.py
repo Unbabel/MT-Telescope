@@ -26,6 +26,7 @@ class LengthFilter(Filter):
         super().__init__(testset)
         self.min_value = min_value
         self.max_value = max_value
+        assert self.min_value < self.max_value, f"Length Filter min value can't be smaller than max value ({min_value} > {max_value})."
 
     def apply_filter(self) -> List[int]:
         dataframe = pd.DataFrame()
