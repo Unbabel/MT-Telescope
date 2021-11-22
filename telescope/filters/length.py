@@ -44,6 +44,6 @@ class LengthFilter(Filter):
             for i in range(len(self.testset))
             if (
                 length_buckets[i] >= self.min_value
-                and length_buckets[i] <= self.max_value
+                and length_buckets[i] < self.max_value
             )
         ]
