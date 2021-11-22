@@ -27,10 +27,8 @@ We highly recommend reading the following papers to learn more about how to perf
 ### Via pip:
 
 ```bash
-pip install mt-telescope
+pip install mt-telescope==0.0.2
 ```
-
-Note: This is a pre-release currently.
 
 ### Locally:
 Create a virtual environment and make sure you have [poetry](https://python-poetry.org/docs/#installation) installed.
